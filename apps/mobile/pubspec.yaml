@@ -1,23 +1,38 @@
-{
-  "name": "personal-agent-mobile",
-  "version": "1.0.0",
-  "description": "Personal AI Agent Mobile APP - iOS/Android",
-  "main": "lib/main.dart",
-  "dependencies": {
-    "flutter": {
-      "sdk": "flutter"
-    },
-    "web_socket_channel": "^2.4.0",
-    "provider": "^6.0.5",
-    "shared_preferences": "^2.2.2",
-    "intl": "^0.18.1",
-    "permission_handler": "^11.0.1",
-    "audioplayers": "^5.2.1"
-  },
-  "dev_dependencies": {
-    "flutter_test": {
-      "sdk": "flutter"
-    },
-    "flutter_lints": "^3.0.1"
-  }
-}
+name: personal_agent_mobile
+description: "Personal AI Agent - iOS/Android Mobile App"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # WebSocket
+  web_socket_channel: ^2.4.0
+  
+  # 状态管理
+  provider: ^6.0.5
+  
+  # 本地存储
+  shared_preferences: ^2.2.2
+  
+  # 国际化
+  intl: ^0.18.1
+  
+  # 权限管理
+  permission_handler: ^11.0.1
+  
+  # 音频播放
+  audioplayers: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
