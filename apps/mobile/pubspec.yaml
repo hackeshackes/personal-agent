@@ -28,6 +28,15 @@ dependencies:
   
   # 音频播放
   audioplayers: ^5.2.1
+  
+  # 录音
+  record_mp3: ^2.2.0
+  
+  # HTTP
+  http: ^1.1.0
+  
+  # 路径
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
