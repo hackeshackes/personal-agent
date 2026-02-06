@@ -47,21 +47,6 @@ personal-agent/
 │   │   ├── agent.py      # Python 代理
 │   │   ├── handlers/      # 消息处理器
 │   │   └── services/      # 核心服务
-│   │       ├── session.js
-│   │       ├── node.js
-│   │       ├── cron.js
-│   │       ├── tool.js
-│   │       ├── nlu.js
-│   │       ├── market.js
-│   │       ├── file.js
-│   │       ├── calendar.js
-│   │       ├── mail.js
-│   │       ├── rag.js
-│   │       ├── memory.js
-│   │       ├── wakeword.js
-│   │       ├── whisper.js
-│   │       ├── elevenlabs.js
-│   │       └── performance.js
 │   └── package.json
 ├── src/skill/            # ⭐ Skill 框架核心
 │   ├── index.js         # 统一入口
@@ -69,16 +54,21 @@ personal-agent/
 │   ├── loader.js        # Skill 加载器
 │   ├── registry.js      # 注册表
 │   ├── manager.js       # 安装管理
-│   └── sandbox.js       # 沙箱隔离 ⭐
+│   ├── sandbox.js       # 沙箱隔离
+│   ├── mcp-adapter.js   # MCP 协议适配 ⭐
+│   ├── marketplace.js    # ClawHub 市场 ⭐
+│   └── cli.js           # CLI 工具 ⭐
 ├── skills/              # ⭐ Skill 目录
 │   ├── builtin/         # 内置 Skill
-│   │   ├── market/     # 市场分析 ⭐
-│   │   └── calculator/ # 计算器 ⭐
-│   ├── community/       # 社区 Skill ⭐
-│   │   ├── weather/   # 天气预报
-│   │   ├── search/    # 网页搜索
-│   │   └── translation/ # 翻译
-│   └── custom/          # 自定义 Skill
+│   │   ├── market/    # 市场分析
+│   │   └── calculator/ # 计算器
+│   └── community/       # 社区 Skill ⭐
+│       ├── weather/   # 天气预报
+│       ├── search/    # 网页搜索
+│       ├── translation/ # 翻译
+│       ├── git/       # Git 操作 ⭐
+│       ├── docker/    # Docker 管理 ⭐
+│       └── database/   # 数据库 ⭐
 ├── skills.json          # Skill 配置
 ├── apps/mobile/          # Flutter APP
 │   └── lib/
@@ -97,101 +87,83 @@ personal-agent/
 | **APP** | ✅ | Flutter iOS/Android |
 | **中文 NLU** | ✅ | jieba 分词 + 意图分类 |
 | **语音** | ✅ | Whisper ASR + ElevenLabs TTS |
-| **市场** | ✅ | 港股/美股/加密/黄金 |
-| **文件** | ✅ | 列表/读写/搜索 |
-| **日历** | ✅ | 事件管理/ICS |
-| **邮件** | ✅ | IMAP/SMTP |
 | **RAG** | ✅ | 文档向量 + 语义搜索 |
 | **记忆** | ✅ | 短期/长期/情景/语义 |
-| **测试** | ✅ | 45+ 测试用例 |
-| **Docker** | ✅ | 生产部署 |
-| **Skill 框架** | ✅ | 完整实现 |
+| **Skill 框架** | ✅ | **完整实现** |
 
-## 🧩 Skill 框架 v4.0 (已实现!)
+## 🧩 Skill 框架 v4.0 (完整实现!)
 
-### ✅ 已实现组件
+### ✅ Phase 1-3 已完成
 
-| 组件 | 文件 | 功能 |
-|------|------|------|
-| **接口定义** | `interfaces.js` | Skill 基类、类型枚举、权限 |
-| **加载器** | `loader.js` | 加载/卸载/执行/批量 |
-| **注册表** | `registry.js` | 元数据管理/搜索/分类 |
-| **管理器** | `manager.js` | GitHub 安装/卸载/更新 |
-| **沙箱** | `sandbox.js` | 进程隔离/超时控制 ⭐ |
+| Phase | 组件 | 文件 | 功能 |
+|-------|------|------|------|
+| **P1** | 核心框架 | `loader/registry/manager` | 加载/注册/安装 |
+| **P2** | 沙箱/社区 | `sandbox.js` | 进程隔离 |
+| **P3** | **MCP/市场/CLI** | `mcp-adapter/marketplace/cli` | 生态集成 ⭐ |
 
-### 📦 已包含 Skill
+### 📦 已包含 Skill (8个)
 
 | Skill | 功能 | 类型 | 来源 |
 |-------|------|------|------|
 | **market** | 港股/美股/加密/黄金 | builtin | 内置 |
-| **calculator** | 数学/货币/金融计算 | builtin | 内置 |
-| **weather** | 天气预报/7天预报 | community | 社区 ⭐ |
-| **search** | 网页搜索 | community | 社区 ⭐ |
-| **translation** | 多语言翻译/检测 | community | 社区 ⭐ |
+| **calculator** | 数学/货币/金融 | builtin | 内置 |
+| **weather** | 天气预报/7天 | community | ⭐新增 |
+| **search** | 网页搜索 | community | ⭐新增 |
+| **translation** | 多语言翻译/检测 | community | ⭐新增 |
+| **git** | Git 操作 | community | ⭐新增 |
+| **docker** | Docker 容器管理 | community | ⭐新增 |
+| **database** | SQL 数据库查询 | community | ⭐新增 |
 
-### 🚀 使用示例
+### 🔗 CLI 命令行
+
+```bash
+# 列出所有 Skill
+skill list
+
+# 搜索市场
+skill search weather
+
+# 安装 Skill
+skill install weather
+
+# 卸载 Skill
+skill uninstall weather
+
+# 执行 Skill
+skill exec calculator calculate expression="100*1.1"
+
+# 查看状态
+skill status
+
+# 健康检查
+skill health
+```
+
+### 🤖 MCP 协议兼容
 
 ```javascript
-// 初始化框架
-const { SkillFramework } = require('./src/skill');
-const framework = await SkillFramework.init();
+// Skill 自动转换为 MCP Tool
+const mcpTools = framework.getMCPTools();
 
-// 执行 Skill
-await framework.execute('market', {
-  action: 'quote',
-  symbol: '9988.HK',
-  market: 'hk'
+// MCP 工具调用
+await framework.callMCTool('weather_execute', {
+  city: '北京',
+  action: 'current'
 });
+```
+
+### 🏪 ClawHub 市场集成
+
+```javascript
+// 浏览精选 Skill
+const featured = await marketplace.getFeatured();
 
 // 搜索 Skill
-framework.search('market');
+const results = await marketplace.search('weather');
 
-// 安装新 Skill
-await framework.install('weather', 'github:user/weather-skill');
-
-// 沙箱执行 (安全)
-await framework.sandboxExecute('calculator', 'calculate', { expression: '2+2' });
+// 获取详情
+const details = await marketplace.getDetails('weather');
 ```
-
-### 📖 Skill 开发
-
-```javascript
-// skills/community/weather/index.js
-class WeatherSkill {
-  static metadata = {
-    id: 'weather',
-    name: '天气预报',
-    description: '获取全球城市天气预报',
-    parameters: {
-      type: 'object',
-      properties: {
-        city: { type: 'string', description: '城市名称' }
-      }
-    }
-  };
-  
-  async execute(params) {
-    const { city } = params;
-    // 实现逻辑
-    return { temperature: 25, condition: '晴朗' };
-  }
-}
-
-module.exports = WeatherSkill;
-```
-
-## 🔧 技术栈
-
-| 层级 | 技术 |
-|------|------|
-| **Gateway** | Node.js + WebSocket |
-| **Agent** | Python + LangChain |
-| **LLM** | Ollama (本地) + OpenAI API |
-| **APP** | Flutter (iOS/Android) |
-| **数据库** | SQLite + Redis + 文件存储 |
-| **NLP** | jieba + Natural |
-| **语音** | Whisper + ElevenLabs |
-| **Skill** | OpenClaw 兼容 + MCP |
 
 ## 📈 开发进度
 
@@ -203,19 +175,20 @@ Week 7-8: ✅ 核心工具
 Week 9-10: ✅ RAG 知识库 + 记忆系统
 Week 11-12: ✅ 优化 + 测试 + 发布
 Week 13-14: ✅ Skill 框架核心
-Week 15-16: ✅ 安装/更新系统 + 沙箱 ⭐
-Week 17-20: 🔄 生态完善
+Week 15-16: ✅ 安装/更新系统 + 沙箱
+Week 17-18: ✅ MCP 协议 + 市场集成 ⭐
+Week 19-20: 🔄 文档完善 + 收尾
 ```
 
 ### 📊 统计数据
 
 | 指标 | 数值 |
 |------|------|
-| 框架核心文件 | 6 |
+| 框架核心文件 | 9 |
 | 内置 Skill | 2 |
-| 社区 Skill | 3 |
-| **总 Skill** | **5** |
-| 代码行数 | ~8,000 |
+| 社区 Skill | 6 |
+| **总 Skill** | **8** |
+| 代码行数 | **~15,000** |
 
 ## 💰 成本估算
 

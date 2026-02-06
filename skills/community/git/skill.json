@@ -1,0 +1,30 @@
+{
+  "id": "git",
+  "name": "Git 操作",
+  "version": "1.0.0",
+  "description": "提供 Git 版本控制操作，包括提交、分支、合并等常用功能",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "GitSkill",
+  
+  "permissions": [
+    "execute"
+  ],
+  
+  "dependencies": {},
+  
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  
+  "keywords": [
+    "git",
+    "version-control",
+    "github",
+    "cli"
+  ],
+  
+  "repository": "https://github.com/personal-agent/git-skill"
+}

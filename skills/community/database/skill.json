@@ -1,0 +1,31 @@
+{
+  "id": "database",
+  "name": "数据库",
+  "version": "1.0.0",
+  "description": "提供 SQL 数据库查询和操作，支持 SQLite、PostgreSQL、MySQL",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "DatabaseSkill",
+  
+  "permissions": [
+    "execute"
+  ],
+  
+  "dependencies": {},
+  
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  
+  "keywords": [
+    "database",
+    "sql",
+    "sqlite",
+    "mysql",
+    "postgresql"
+  ],
+  
+  "repository": "https://github.com/personal-agent/database-skill"
+}

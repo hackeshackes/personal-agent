@@ -9,18 +9,21 @@
     "community": [
       "weather",
       "search",
-      "translation"
+      "translation",
+      "git",
+      "docker",
+      "database"
     ],
     "custom": []
   },
   "defaults": {
     "autoUpdate": true,
-    "sandboxEnabled": false,
+    "sandboxEnabled": true,
     "cacheTimeout": 300000,
     "maxConcurrent": 10
   },
   "metadata": {
     "created": "2026-02-06T12:00:00Z",
-    "lastUpdate": "2026-02-06T13:10:00Z"
+    "lastUpdate": "2026-02-06T13:15:00Z"
   }
 }

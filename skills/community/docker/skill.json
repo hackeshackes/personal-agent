@@ -1,0 +1,30 @@
+{
+  "id": "docker",
+  "name": "Docker 管理",
+  "version": "1.0.0",
+  "description": "提供 Docker 容器管理操作，包括镜像、容器、Compose 等",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "DockerSkill",
+  
+  "permissions": [
+    "execute"
+  ],
+  
+  "dependencies": {},
+  
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  
+  "keywords": [
+    "docker",
+    "container",
+    "docker-compose",
+    "devops"
+  ],
+  
+  "repository": "https://github.com/personal-agent/docker-skill"
+}
