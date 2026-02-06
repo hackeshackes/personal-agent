@@ -1,39 +1,37 @@
-## 🚀 Phase 1-4 完成进度
+## 🚀 Phase 1-6 完成进度
 
 ### ✅ Phase 1 - Gateway + APP 初始化 (W1-2)
-- [x] **Gateway WebSocket 控制平面** (Node.js)
-- [x] **Flutter Mobile APP** (iOS/Android)
+- [x] Gateway WebSocket 控制平面
+- [x] Flutter Mobile APP
 
 ### ✅ Phase 2 - WebSocket 通信 + 中文 NLU (W3-4)
-- [x] **中文 NLP 服务** (jieba + 意图分类)
-- [x] **Tool Bridge** (Python Agent 通信)
+- [x] 中文 NLP 服务 (jieba + 意图分类)
+- [x] Tool Bridge
 
 ### ✅ Phase 3 - 语音唤醒/输入/回复 (W5-6)
-- [x] **唤醒词检测** (Porcupine 占位)
-- [x] **Whisper ASR** (本地/API)
-- [x] **ElevenLabs TTS** (语音合成)
+- [x] 唤醒词检测 (Porcupine)
+- [x] Whisper ASR
+- [x] ElevenLabs TTS
 
 ### ✅ Phase 4 - 核心工具 (W7-8)
-- [x] **Market Tool** - 金融市场分析
-  - 港股/美股/加密货币/黄金
-  - 技术指标 (RSI)
-  - 5分钟缓存
+- [x] Market Tool (港股/美股/加密)
+- [x] File Tool
+- [x] Calendar Tool
+- [x] Mail Tool
 
-- [x] **File Tool** - 文件操作
-  - 列表/读取/创建/删除
-  - 搜索/复制/移动
-  - 路径解析
+### ✅ Phase 5-6 - RAG 知识库 + 记忆系统 (W9-10)
+- [x] **RAG Service** - 检索增强生成
+  - 文档分块 (chunking)
+  - 向量化 (embedding 占位)
+  - 语义搜索 (cosine similarity)
+  - 问答系统
 
-- [x] **Calendar Tool** - 日历管理
-  - 今日/明日/本周日程
-  - 添加/删除/更新事件
-  - ICS 导入导出
-
-- [x] **Mail Tool** - 邮件管理
-  - 未读邮件/最近邮件
-  - 搜索/标记已读
-  - SMTP 发送 (占位)
-  - 缓存同步
+- [x] **Memory System** - 记忆系统
+  - 短期记忆 (Session)
+  - 长期记忆 (持久化)
+  - 情景记忆 (事件序列)
+  - 语义记忆 (事实知识)
+  - 记忆整合 (consolidate)
 
 ### 📁 项目结构
 
@@ -53,10 +51,12 @@ personal-agent/
 │       ├── wakeword.js
 │       ├── whisper.js
 │       ├── elevenlabs.js
-│       ├── market.js      ⭐
-│       ├── file.js        ⭐
-│       ├── calendar.js    ⭐
-│       └── mail.js        ⭐
+│       ├── market.js
+│       ├── file.js
+│       ├── calendar.js
+│       ├── mail.js
+│       ├── rag.js           ⭐
+│       └── memory.js        ⭐
 ├── apps/mobile/lib/
 │   ├── services/
 │   └── screens/
@@ -70,7 +70,6 @@ personal-agent/
 # Gateway
 cd gateway
 npm install
-python3 src/agent.py &
 node src/server.js
 
 # APP
@@ -78,8 +77,17 @@ cd apps/mobile
 flutter run
 ```
 
+### 📊 记忆系统
+
+| 类型 | 大小 | 用途 |
+|------|------|------|
+| 短期 | 50条 | 当前会话 |
+| 长期 | 1000条 | 重要事实 |
+| 情景 | 500条 | 事件序列 |
+| 语义 | 无限制 | 事实知识 |
+
 ---
 
-**Total Progress: 4/12 Weeks (33%)**
+**Total Progress: 6/12 Weeks (50%)**
 
-**Next**: Phase 5-6 (W9-10) - RAG 知识库 + 记忆系统
+**Next**: Phase 7-8 (W11-12) - 优化 + 测试 + 发布
