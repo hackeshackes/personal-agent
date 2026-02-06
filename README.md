@@ -1,4 +1,4 @@
-# Personal AI Agent 🎯
+# Personal AI Agent （基于AI构建，测试需谨慎！！！！）🎯
 
 > 基于 OpenClaw 架构的中文智能体，支持 iOS/Android APP 随时随地语音/文字沟通
 
