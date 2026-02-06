@@ -1,0 +1,31 @@
+{
+  "id": "search",
+  "name": "网页搜索",
+  "version": "1.0.0",
+  "description": "提供网页搜索功能，支持多搜索引擎、结果筛选",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "SearchSkill",
+  
+  "permissions": [
+    "http.request"
+  ],
+  
+  "dependencies": {},
+  
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  
+  "keywords": [
+    "search",
+    "web",
+    "duckduckgo",
+    "bing",
+    "google"
+  ],
+  
+  "repository": "https://github.com/personal-agent/search-skill"
+}

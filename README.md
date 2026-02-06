@@ -68,12 +68,16 @@ personal-agent/
 │   ├── interfaces.js     # Skill 基类
 │   ├── loader.js        # Skill 加载器
 │   ├── registry.js      # 注册表
-│   └── manager.js       # 安装管理
+│   ├── manager.js       # 安装管理
+│   └── sandbox.js       # 沙箱隔离 ⭐
 ├── skills/              # ⭐ Skill 目录
 │   ├── builtin/         # 内置 Skill
 │   │   ├── market/     # 市场分析 ⭐
 │   │   └── calculator/ # 计算器 ⭐
-│   ├── community/       # 社区 Skill
+│   ├── community/       # 社区 Skill ⭐
+│   │   ├── weather/   # 天气预报
+│   │   ├── search/    # 网页搜索
+│   │   └── translation/ # 翻译
 │   └── custom/          # 自定义 Skill
 ├── skills.json          # Skill 配置
 ├── apps/mobile/          # Flutter APP
@@ -101,25 +105,29 @@ personal-agent/
 | **记忆** | ✅ | 短期/长期/情景/语义 |
 | **测试** | ✅ | 45+ 测试用例 |
 | **Docker** | ✅ | 生产部署 |
-| **Skill 框架** | ✅ | 核心框架已实现 |
+| **Skill 框架** | ✅ | 完整实现 |
 
 ## 🧩 Skill 框架 v4.0 (已实现!)
 
-### ✅ 已实现功能
+### ✅ 已实现组件
 
 | 组件 | 文件 | 功能 |
 |------|------|------|
-| **接口定义** | `interfaces.js` | Skill 基类、类型枚举 |
-| **加载器** | `loader.js` | 加载/卸载/执行 |
-| **注册表** | `registry.js` | 元数据管理/搜索 |
-| **管理器** | `manager.js` | 安装/卸载/更新 |
+| **接口定义** | `interfaces.js` | Skill 基类、类型枚举、权限 |
+| **加载器** | `loader.js` | 加载/卸载/执行/批量 |
+| **注册表** | `registry.js` | 元数据管理/搜索/分类 |
+| **管理器** | `manager.js` | GitHub 安装/卸载/更新 |
+| **沙箱** | `sandbox.js` | 进程隔离/超时控制 ⭐ |
 
 ### 📦 已包含 Skill
 
-| Skill | 功能 | 市场 |
-|-------|------|------|
-| **market** | 港股/美股/加密/黄金 | builtin |
-| **calculator** | 数学/货币/金融计算 | builtin |
+| Skill | 功能 | 类型 | 来源 |
+|-------|------|------|------|
+| **market** | 港股/美股/加密/黄金 | builtin | 内置 |
+| **calculator** | 数学/货币/金融计算 | builtin | 内置 |
+| **weather** | 天气预报/7天预报 | community | 社区 ⭐ |
+| **search** | 网页搜索 | community | 社区 ⭐ |
+| **translation** | 多语言翻译/检测 | community | 社区 ⭐ |
 
 ### 🚀 使用示例
 
@@ -129,17 +137,20 @@ const { SkillFramework } = require('./src/skill');
 const framework = await SkillFramework.init();
 
 // 执行 Skill
-const result = await framework.execute('market', {
+await framework.execute('market', {
   action: 'quote',
   symbol: '9988.HK',
   market: 'hk'
 });
 
 // 搜索 Skill
-const skills = framework.search('market');
+framework.search('market');
 
 // 安装新 Skill
 await framework.install('weather', 'github:user/weather-skill');
+
+// 沙箱执行 (安全)
+await framework.sandboxExecute('calculator', 'calculate', { expression: '2+2' });
 ```
 
 ### 📖 Skill 开发
@@ -160,24 +171,13 @@ class WeatherSkill {
   };
   
   async execute(params) {
+    const { city } = params;
     // 实现逻辑
     return { temperature: 25, condition: '晴朗' };
   }
 }
 
 module.exports = WeatherSkill;
-```
-
-```json
-// skills/community/weather/skill.json
-{
-  "id": "weather",
-  "name": "天气预报",
-  "version": "1.0.0",
-  "entry": "index.js",
-  "main": "WeatherSkill",
-  "keywords": ["weather", "forecast"]
-}
 ```
 
 ## 🔧 技术栈
@@ -203,9 +203,19 @@ Week 7-8: ✅ 核心工具
 Week 9-10: ✅ RAG 知识库 + 记忆系统
 Week 11-12: ✅ 优化 + 测试 + 发布
 Week 13-14: ✅ Skill 框架核心
-Week 15-16: 🔄 安装/更新系统
+Week 15-16: ✅ 安装/更新系统 + 沙箱 ⭐
 Week 17-20: 🔄 生态完善
 ```
+
+### 📊 统计数据
+
+| 指标 | 数值 |
+|------|------|
+| 框架核心文件 | 6 |
+| 内置 Skill | 2 |
+| 社区 Skill | 3 |
+| **总 Skill** | **5** |
+| 代码行数 | ~8,000 |
 
 ## 💰 成本估算
 

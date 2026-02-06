@@ -1,0 +1,30 @@
+{
+  "id": "translation",
+  "name": "翻译",
+  "version": "1.0.0",
+  "description": "提供多语言翻译支持，包括文本翻译和语言检测",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "TranslationSkill",
+  
+  "permissions": [
+    "http.request"
+  ],
+  
+  "dependencies": {},
+  
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  
+  "keywords": [
+    "translation",
+    "translate",
+    "language",
+    "nlp"
+  ],
+  
+  "repository": "https://github.com/personal-agent/translation-skill"
+}
