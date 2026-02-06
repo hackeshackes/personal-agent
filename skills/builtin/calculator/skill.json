@@ -1,0 +1,29 @@
+{
+  "id": "calculator",
+  "name": "计算器",
+  "version": "1.0.0",
+  "description": "提供数学计算、货币换算、百分比计算等常用计算功能",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "CalculatorSkill",
+  
+  "permissions": [],
+  
+  "dependencies": {},
+  
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  
+  "keywords": [
+    "calculator",
+    "math",
+    "currency",
+    "convert",
+    "percentage"
+  ],
+  
+  "repository": "https://github.com/hackeshackes/personal-agent/tree/main/skills/builtin/calculator"
+}

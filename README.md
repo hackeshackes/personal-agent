@@ -12,7 +12,7 @@
 - 🇨🇳 **中文优化** - 中文 NLP、中文语音、中文知识库
 - 🔒 **隐私保护** - 本地处理、本地存储
 - 🔌 **工具丰富** - 市场/文件/日历/邮件全能
-- 🧩 **Skill 框架** - 可扩展插件系统 (规划中)
+- 🧩 **Skill 框架** - 可扩展插件系统
 
 ## 🚀 快速开始
 
@@ -63,22 +63,26 @@ personal-agent/
 │   │       ├── elevenlabs.js
 │   │       └── performance.js
 │   └── package.json
-├── apps/mobile/          # Flutter APP
-│   └── lib/
-│       ├── main.dart
-│       ├── services/
-│       ├── screens/
-│       └── models/
-├── skills/               # ⭐ Skill 框架 (规划中)
+├── src/skill/            # ⭐ Skill 框架核心
+│   ├── index.js         # 统一入口
+│   ├── interfaces.js     # Skill 基类
+│   ├── loader.js        # Skill 加载器
+│   ├── registry.js      # 注册表
+│   └── manager.js       # 安装管理
+├── skills/              # ⭐ Skill 目录
 │   ├── builtin/         # 内置 Skill
+│   │   ├── market/     # 市场分析 ⭐
+│   │   └── calculator/ # 计算器 ⭐
 │   ├── community/       # 社区 Skill
 │   └── custom/          # 自定义 Skill
+├── skills.json          # Skill 配置
+├── apps/mobile/          # Flutter APP
+│   └── lib/
 ├── tests/               # 测试套件
 ├── docs/                # 文档
-│   └── skill-framework-v4.md  # Skill 框架规划
-├── deployments/         # 部署配置
-│   └── docker/
-└── README.md
+│   └── skill-framework-v4.md
+└── deployments/         # 部署配置
+    └── docker/
 ```
 
 ## 📊 功能矩阵
@@ -97,45 +101,84 @@ personal-agent/
 | **记忆** | ✅ | 短期/长期/情景/语义 |
 | **测试** | ✅ | 45+ 测试用例 |
 | **Docker** | ✅ | 生产部署 |
-| **Skill 框架** | 🔄 **规划中** | 可扩展插件系统 |
+| **Skill 框架** | ✅ | 核心框架已实现 |
 
-## 🧩 Skill 框架 v4.0 (规划中)
+## 🧩 Skill 框架 v4.0 (已实现!)
 
-### 目标
+### ✅ 已实现功能
 
-扩展为 OpenClaw 兼容的 Skill 框架，支持：
-- ✅ 标准化 Skill 接口
-- ✅ Skill 市场/安装系统
-- ✅ 主流 Skill 即插即用
-- ✅ MCP 协议兼容
+| 组件 | 文件 | 功能 |
+|------|------|------|
+| **接口定义** | `interfaces.js` | Skill 基类、类型枚举 |
+| **加载器** | `loader.js` | 加载/卸载/执行 |
+| **注册表** | `registry.js` | 元数据管理/搜索 |
+| **管理器** | `manager.js` | 安装/卸载/更新 |
 
-### 参考项目
+### 📦 已包含 Skill
 
-| 项目 | 特点 |
-|------|------|
-| **OpenClaw Skills** | 官方 Skill 框架 |
-| **MCP (Anthropic)** | 模型上下文协议 |
-| **LangChain Tools** | 工具调用框架 |
+| Skill | 功能 | 市场 |
+|-------|------|------|
+| **market** | 港股/美股/加密/黄金 | builtin |
+| **calculator** | 数学/货币/金融计算 | builtin |
 
-### 规划功能
+### 🚀 使用示例
 
-| Phase | 功能 | 周数 |
-|-------|------|-------|
-| Phase 1 | 核心框架 | W1-2 |
-| Phase 2 | 安装系统 | W3-4 |
-| Phase 3 | 市场集成 | W5-6 |
-| Phase 4 | 生态完善 | W7-8 |
+```javascript
+// 初始化框架
+const { SkillFramework } = require('./src/skill');
+const framework = await SkillFramework.init();
 
-### 计划 Skill
+// 执行 Skill
+const result = await framework.execute('market', {
+  action: 'quote',
+  symbol: '9988.HK',
+  market: 'hk'
+});
 
-| 类别 | Skill |
-|------|-------|
-| **基础** | calculator, search, weather, translation |
-| **开发** | git, docker, database, code |
-| **数据** | market, stocks, crypto, excel, pdf |
-| **生活** | calendar, mail, notes, reminders |
+// 搜索 Skill
+const skills = framework.search('market');
 
-📖 详情: [docs/skill-framework-v4.md](./docs/skill-framework-v4.md)
+// 安装新 Skill
+await framework.install('weather', 'github:user/weather-skill');
+```
+
+### 📖 Skill 开发
+
+```javascript
+// skills/community/weather/index.js
+class WeatherSkill {
+  static metadata = {
+    id: 'weather',
+    name: '天气预报',
+    description: '获取全球城市天气预报',
+    parameters: {
+      type: 'object',
+      properties: {
+        city: { type: 'string', description: '城市名称' }
+      }
+    }
+  };
+  
+  async execute(params) {
+    // 实现逻辑
+    return { temperature: 25, condition: '晴朗' };
+  }
+}
+
+module.exports = WeatherSkill;
+```
+
+```json
+// skills/community/weather/skill.json
+{
+  "id": "weather",
+  "name": "天气预报",
+  "version": "1.0.0",
+  "entry": "index.js",
+  "main": "WeatherSkill",
+  "keywords": ["weather", "forecast"]
+}
+```
 
 ## 🔧 技术栈
 
@@ -148,7 +191,7 @@ personal-agent/
 | **数据库** | SQLite + Redis + 文件存储 |
 | **NLP** | jieba + Natural |
 | **语音** | Whisper + ElevenLabs |
-| **Skill** | OpenClaw + MCP 兼容 |
+| **Skill** | OpenClaw 兼容 + MCP |
 
 ## 📈 开发进度
 
@@ -159,7 +202,9 @@ Week 5-6: ✅ 语音唤醒/输入/回复
 Week 7-8: ✅ 核心工具
 Week 9-10: ✅ RAG 知识库 + 记忆系统
 Week 11-12: ✅ 优化 + 测试 + 发布
-Week 13-20: 🔄 Skill 框架 (规划中)
+Week 13-14: ✅ Skill 框架核心
+Week 15-16: 🔄 安装/更新系统
+Week 17-20: 🔄 生态完善
 ```
 
 ## 💰 成本估算

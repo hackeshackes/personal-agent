@@ -1,0 +1,43 @@
+{
+  "id": "market",
+  "name": "市场分析",
+  "version": "1.0.0",
+  "description": "提供股票、加密货币、黄金等市场数据分析，支持港股、美股、A股实时行情查询和技术指标分析",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "MarketSkill",
+  
+  "permissions": [
+    "http.request"
+  ],
+  
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  
+  "keywords": [
+    "finance",
+    "stock",
+    "crypto",
+    "bitcoin",
+    "gold",
+    "market",
+    "trading",
+    "hk-stock",
+    "us-stock"
+  ],
+  
+  "repository": "https://github.com/hackeshackes/personal-agent/tree/main/skills/builtin/market",
+  
+  "homepage": "https://github.com/hackeshackes/personal-agent",
+  
+  "bugs": {
+    "url": "https://github.com/hackeshackes/personal-agent/issues"
+  }
+}
