@@ -1,92 +1,67 @@
-## 🚀 Phase 1 + Phase 2 + Phase 3 完成进度
+## 🚀 Phase 1-4 完成进度
 
 ### ✅ Phase 1 - Gateway + APP 初始化 (W1-2)
 - [x] **Gateway WebSocket 控制平面** (Node.js)
-  - 会话管理 (Session Manager)
-  - 节点管理 (Node Manager)
-  - 任务调度 (Cron Manager)
-  - 工具注册 (Tool Registry)
-  - HTTP API + Dashboard
-  - 配对系统 (二维码/配对码)
-
 - [x] **Flutter Mobile APP** (iOS/Android)
-  - WebSocket 服务
-  - 语音服务 (Whisper/ElevenLabs 占位)
-  - 存储服务
-  - Home/Chat/Voice/Settings 屏幕
-  - Material 3 深色主题
-  - Provider 状态管理
 
 ### ✅ Phase 2 - WebSocket 通信 + 中文 NLU (W3-4)
-- [x] **中文 NLP 服务**
-  - jieba 分词
-  - 意图分类器 (BayesClassifier)
-  - 实体抽取 (日期/时间/数字/股票/文件)
-  - 回复模板
-
-- [x] **Tool Bridge**
-  - Python Agent 通信
-  - 市场查询桥接
-  - 文件操作桥接
-  - 日历/邮件桥接
+- [x] **中文 NLP 服务** (jieba + 意图分类)
+- [x] **Tool Bridge** (Python Agent 通信)
 
 ### ✅ Phase 3 - 语音唤醒/输入/回复 (W5-6)
-- [x] **唤醒词检测** (WakeWord)
-  - Porcupine 集成 (占位)
-  - 唤醒词: "小智", "嘿小智"
+- [x] **唤醒词检测** (Porcupine 占位)
+- [x] **Whisper ASR** (本地/API)
+- [x] **ElevenLabs TTS** (语音合成)
 
-- [x] **语音识别** (Whisper)
-  - 本地 Whisper CLI 集成
-  - OpenAI Whisper API 支持
-  - 中文识别优化
+### ✅ Phase 4 - 核心工具 (W7-8)
+- [x] **Market Tool** - 金融市场分析
+  - 港股/美股/加密货币/黄金
+  - 技术指标 (RSI)
+  - 5分钟缓存
 
-- [x] **语音合成** (ElevenLabs)
-  - API 集成
-  - 多声音支持
-  - 使用统计
+- [x] **File Tool** - 文件操作
+  - 列表/读取/创建/删除
+  - 搜索/复制/移动
+  - 路径解析
 
-- [x] **Flutter 语音服务**
-  - 录音管理 (record_mp3)
-  - 实时转录
-  - 音频播放
+- [x] **Calendar Tool** - 日历管理
+  - 今日/明日/本周日程
+  - 添加/删除/更新事件
+  - ICS 导入导出
+
+- [x] **Mail Tool** - 邮件管理
+  - 未读邮件/最近邮件
+  - 搜索/标记已读
+  - SMTP 发送 (占位)
+  - 缓存同步
 
 ### 📁 项目结构
 
 ```
 personal-agent/
-├── gateway/
-│   ├── src/
-│   │   ├── server.js           # 主服务器
-│   │   ├── agent.py            # Python 代理核心
-│   │   ├── handlers/          # 消息处理器
-│   │   ├── services/
-│   │   │   ├── session.js
-│   │   │   ├── node.js
-│   │   │   ├── cron.js
-│   │   │   ├── tool.js
-│   │   │   ├── nlu.js         # 中文 NLU ⭐
-│   │   │   ├── bridge.js      # Tool Bridge ⭐
-│   │   │   ├── wakeword.js   # 唤醒词检测 ⭐
-│   │   │   ├── whisper.js     # Whisper ASR ⭐
-│   │   │   └── elevenlabs.js  # ElevenLabs TTS ⭐
-│   │   └── agent.py
-│   └── package.json
-├── apps/mobile/               # Flutter APP
-│   └── lib/
-│       ├── main.dart
-│       ├── services/
-│       │   ├── websocket_service.dart
-│       │   ├── voice_service.dart  # 完整语音服务 ⭐
-│       │   └── storage_service.dart
-│       ├── screens/
-│       │   ├── home_screen.dart
-│       │   ├── chat_screen.dart
-│       │   ├── voice_screen.dart
-│       │   └── settings_screen.dart
-│       └── models/
-├── docs/                      # 文档
-│   └── voice-module.md       # 语音模块文档 ⭐
-└── README.md
+├── gateway/src/
+│   ├── server.js
+│   ├── agent.py
+│   ├── handlers/
+│   └── services/
+│       ├── session.js
+│       ├── node.js
+│       ├── cron.js
+│       ├── tool.js
+│       ├── nlu.js
+│       ├── bridge.js
+│       ├── wakeword.js
+│       ├── whisper.js
+│       ├── elevenlabs.js
+│       ├── market.js      ⭐
+│       ├── file.js        ⭐
+│       ├── calendar.js    ⭐
+│       └── mail.js        ⭐
+├── apps/mobile/lib/
+│   ├── services/
+│   └── screens/
+└── docs/
+    └── voice-module.md
 ```
 
 ### 🔧 启动命令
@@ -95,27 +70,16 @@ personal-agent/
 # Gateway
 cd gateway
 npm install
-python3 src/agent.py &   # 后台运行 Python Agent
-node src/server.js        # 启动 Gateway
+python3 src/agent.py &
+node src/server.js
 
 # APP
 cd apps/mobile
-flutter pub get
 flutter run
-```
-
-### 📋 环境变量
-
-```bash
-# .env
-OPENAI_API_KEY="sk-xxx"           # Whisper API
-ELEVENLABS_API_KEY="xi-xxx"        # TTS
-PICOVOICE_ACCESS_KEY="xxx"         # 唤醒词
-WHISPER_LOCAL="true"               # 本地识别
 ```
 
 ---
 
-**Total Progress: 3/12 Weeks (25%)**
+**Total Progress: 4/12 Weeks (33%)**
 
-**Next**: Phase 4 (W7-8) - 核心工具 (文件/金融/日历/邮件)
+**Next**: Phase 5-6 (W9-10) - RAG 知识库 + 记忆系统
