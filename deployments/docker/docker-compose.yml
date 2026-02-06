@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  personal-agent:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile
+    container_name: personal-agent
+    ports:
+      - "18789:18789"
+    volumes:
+      - personal-agent-data:/app/data
+      - personal-agent-logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PORT=18789
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY:-}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:18789/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - personal-agent-network
+
+  # 可选: Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: personal-agent-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - personal-agent-network
+
+volumes:
+  personal-agent-data:
+  personal-agent-logs:
+  redis-data:
+
+networks:
+  personal-agent-network:
+    driver: bridge
