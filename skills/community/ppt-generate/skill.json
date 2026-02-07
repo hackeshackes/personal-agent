@@ -1,0 +1,30 @@
+{
+  "id": "ppt-generate",
+  "name": "PPT生成",
+  "version": "1.0.0",
+  "description": "本地生成精美 PPT 演示文稿，支持多种主题和布局，无需 API Key",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "PPTGenerateSkill",
+  
+  "permissions": [
+    "filesystem.write"
+  ],
+  
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  
+  "keywords": [
+    "ppt",
+    "powerpoint",
+    "presentation",
+    "slides"
+  ],
+  
+  "repository": "https://github.com/personal-agent/ppt-generate-skill",
+  
+  "homepage": "https://github.com/personal-agent"
+}
