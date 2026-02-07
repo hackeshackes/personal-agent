@@ -1,0 +1,31 @@
+{
+  "id": "find-skills",
+  "name": "技能搜索",
+  "version": "1.0.0",
+  "description": "搜索和发现可用的 Skills，支持按名称、关键词、分类筛选",
+  "author": "Personal AI Agent Team",
+  "license": "MIT",
+  
+  "entry": "index.js",
+  "main": "FindSkillsSkill",
+  
+  "permissions": [
+    "filesystem.read"
+  ],
+  
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  
+  "keywords": [
+    "find-skills",
+    "search",
+    "discover",
+    "skills",
+    "plugins"
+  ],
+  
+  "repository": "https://github.com/personal-agent/find-skills-skill",
+  
+  "homepage": "https://github.com/personal-agent"
+}
